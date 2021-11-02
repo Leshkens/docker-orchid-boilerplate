@@ -7,9 +7,10 @@
 ### Install 
 
 1. `git clone https://github.com/Leshkens/docker-orchid-boilerplate.git && git remote rm origin`
-2. `make init`
-3. _(Optional)_ Configure `.env`
-4. `make install`
+2. `cd docker-orchid-boilerplate`
+3. `make init`
+4. _(Optional)_ Configure `.env`
+5. `make install`
 
 ### Usage
 
