@@ -2,7 +2,7 @@
 
 SHELL := /bin/bash
 
-.PHONY : help init up install serve serve-quiet app-cli
+.PHONY : help init up down install serve serve-quiet app-cli
 .DEFAULT_GOAL : help
 
 DOCKER_ENV_FILE = .env
@@ -24,6 +24,9 @@ init: ## First command
 
 up: ## Up containers
 	@docker-compose --env-file $(DOCKER_ENV_FILE) up -d
+
+down: ## Stops containers and removes containers, networks, volumes, and images created by Up
+	@docker-compose down
 
 install: ## Run install for development
 	$(call check_env,$(DOCKER_ENV_FILE))
@@ -55,6 +58,6 @@ app-cli: ## Connect to app container
 check_env = \
 	@if [ ! -f $(1) ]; \
 	then \
-		 echo "File $(1) not found"; \
-		 exit 1; \
+		echo "File $(1) not found"; \
+		exit 1; \
 	fi;
