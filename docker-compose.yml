@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    #app
+    app:
+        build:
+            context: docker/app
+            dockerfile: Dockerfile
+            args:
+                PHP_VERSION: ${PHP_VERSION}
+                NODE_VERSION: ${NODE_VERSION}
+                NVM_VERSION: ${NVM_VERSION}
+                LARAVEL_VERSION: ${LARAVEL_VERSION}
+                ORCHID_VERSION: ${ORCHID_VERSION}
+                HOST_FILES_OWNER_UID: ${HOST_FILES_OWNER_UID}
+                HOST_FILES_OWNER_NAME: ${HOST_FILES_OWNER_NAME}
+        image: ${COMPOSE_PROJECT_NAME}_app
+        container_name: ${COMPOSE_PROJECT_NAME}_app
+        tty: true
+        environment:
+            XDEBUG_CONFIG: "client_host=host.docker.internal"
+            PHP_IDE_CONFIG: "serverName=Docker"
+        ports:
+            - '${PROJECT_IP}:80:80'
+#            - '${PROJECT_IP}:443:443'
+        volumes:
+            - '${APP_PATH}:/var/www/app'
+            - './docker/app/php.ini:/usr/local/etc/php/php.ini'
+        depends_on:
+            - 'database'
+
+    database:
+        image: mariadb:${MYSQL_VERSION}
+        container_name: ${COMPOSE_PROJECT_NAME}_database
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+            - '${PROJECT_IP}:3306:3306'
+        volumes:
+            - './docker/database/dbdata:/var/lib/mysql'
