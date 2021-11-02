@@ -40,15 +40,15 @@ install: ## Run install for development
 		&& composer require orchid/platform:$(ORCHID_VERSION) \
 		&& php artisan orchid:install"
 
-serve:
+serve: ## Run server
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash -c \
 		"php artisan serve --host=0.0.0.0 --port=80"
 
-serve-quiet:
+serve-quiet: ## Run server in detach mode
 	@docker exec -d $(COMPOSE_PROJECT_NAME)_app /bin/bash -c \
 		"php artisan serve --host=0.0.0.0 --port=80"
 
-app-cli:
+app-cli: ## Connect to app container
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash
 
 # --- [ Functions ] ----------------------------------------------------------------------------------------------------
