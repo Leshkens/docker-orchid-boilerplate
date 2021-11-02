@@ -37,21 +37,11 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | b
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#RUN cd /var/www \
-#    && composer create-project laravel/laravel=${LARAVEL_VERSION} . --prefer-dist
-
 RUN mkdir /var/www/app
 
 WORKDIR /var/www/app
 
-#RUN composer require orchid/platform:${ORCHID_VERSION}
-
-#RUN php artisan orchid:install
-
 RUN adduser --uid ${HOST_FILES_OWNER_UID} ${HOST_FILES_OWNER_NAME} \
     && usermod -a -G root ${HOST_FILES_OWNER_NAME}
-#    && usermod -a -G www-data ${HOST_FILES_OWNER_NAME}
 
 USER ${HOST_FILES_OWNER_NAME}
-
-EXPOSE 8000
