@@ -3,4 +3,4 @@
 out
 gen
 .env
-.src
+/src
