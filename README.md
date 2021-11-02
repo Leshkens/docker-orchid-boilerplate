@@ -15,3 +15,4 @@
 
 1. Run server `make serve` or `make serve-quiet`
 2. For create admin user run `make app-cli` and execute `php artisan orchid:admin`
+3. For up containers run `make up`, for down run `make down`
