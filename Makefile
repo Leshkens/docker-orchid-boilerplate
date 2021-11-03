@@ -18,8 +18,9 @@ help: ## Show this help
 init: ## First command
 	@if [ ! -f $(DOCKER_ENV_FILE) ]; \
 	then \
-		 cp $(DOCKER_ENV_FILE).example $(DOCKER_ENV_FILE); \
-		 sed -i "s/HOST_FILES_OWNER_NAME=.*/HOST_FILES_OWNER_NAME=$(USER)/" $(DOCKER_ENV_FILE); \
+		cp $(DOCKER_ENV_FILE).example $(DOCKER_ENV_FILE); \
+		sed -i -e 's/HOST_FILES_OWNER_UID=.*/HOST_FILES_OWNER_UID=$(shell id -u)/' \
+			-e 's/HOST_FILES_OWNER_NAME=.*/HOST_FILES_OWNER_NAME=$(USER)/' $(DOCKER_ENV_FILE); \
 	fi;
 
 up: ## Up containers
