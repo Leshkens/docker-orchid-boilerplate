@@ -34,7 +34,7 @@ install: ## Run install for development
 	@mkdir -p $(APP_PATH)
 	@docker-compose --env-file $(DOCKER_ENV_FILE) up -d --build
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash -c \
-	"composer create-project laravel/laravel=$(LARAVEL_VERSION) . --prefer-dist \
+	"composer create-project laravel/laravel . '$(LARAVEL_VERSION)' --prefer-dist \
 		&& sed -i -e 's/APP_NAME=.*/APP_NAME=$(COMPOSE_PROJECT_NAME)/' \
 		 -e 's/APP_NAME=.*/APP_NAME=$(COMPOSE_PROJECT_NAME)/' \
 		 -e 's/DB_DATABASE=.*/DB_DATABASE=$(MYSQL_DATABASE)/' \
