@@ -43,7 +43,8 @@ install: ## Run install for development
 		 -e 's/DB_PASSWORD=.*/DB_PASSWORD=$(MYSQL_PASSWORD)/' \
 		 -e 's/DB_HOST=.*/DB_HOST=database/' .env \
 		&& composer require orchid/platform:$(ORCHID_VERSION) \
-		&& php artisan orchid:install"
+		&& php artisan orchid:install -qn"
+	@echo "Installation complete. To start the embedded server, run 'make serve'. For create admin user run 'make app-cli' and execute 'php artisan orchid:admin'."
 
 serve: ## Run server
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash -c \
