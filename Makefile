@@ -31,7 +31,6 @@ down: ## Stops containers and removes containers, networks, volumes, and images 
 
 install: ## Run install for development
 	$(call check_env,$(DOCKER_ENV_FILE))
-	@mkdir -p $(APP_PATH)
 	@docker-compose --env-file $(DOCKER_ENV_FILE) up -d --build
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash -c \
 	"composer create-project laravel/laravel tmp '$(LARAVEL_VERSION)' --prefer-dist \

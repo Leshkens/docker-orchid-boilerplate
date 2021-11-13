@@ -23,8 +23,8 @@ services:
             - '${PROJECT_IP}:80:80'
 #            - '${PROJECT_IP}:443:443'
         volumes:
-            - '${APP_PATH}:/var/www/app'
-            - './docker/app/php.ini:/usr/local/etc/php/php.ini'
+            - './src:/var/www/app'
+            - './docker/php/php.ini:/usr/local/etc/php/php.ini'
         depends_on:
             - 'database'
 
