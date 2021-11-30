@@ -1,3 +1,15 @@
+### Fuatures
+In app container:
+- **PHP 8** (additional extensions: bcmath, pdo_mysql, opcache, apcu, xdebug)
+- PHP_CodeSniffer
+- **[Laravel 8](https://laravel.com/)**
+- **[Orchid 10](https://orchid.software/)**
+- Git
+- Composer
+- NVM & **NodeJS 16**
+
+As a database: **MariaDB 10**
+
 ### Requirements
 - GNU/Linux (e.g. Debian, Ubuntu)
 - GNU Make
