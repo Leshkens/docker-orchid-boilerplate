@@ -58,6 +58,10 @@ serve-quiet: ## Run server in detach mode
 app-cli: ## Connect to app container
 	@docker exec -it $(COMPOSE_PROJECT_NAME)_app /bin/bash
 
+reset:
+	@rm -rf ./.env
+	@rm -rf ./docker/database/dbdata
+
 # --- [ Functions ] ----------------------------------------------------------------------------------------------------
 check_env = \
 	@if [ ! -f $(1) ]; \
