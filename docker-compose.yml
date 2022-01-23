@@ -1,4 +1,4 @@
-version: '3'
+version: '2.4'
 
 services:
     app:
@@ -9,8 +9,6 @@ services:
                 PHP_VERSION: ${PHP_VERSION}
                 NODE_VERSION: ${NODE_VERSION}
                 NVM_VERSION: ${NVM_VERSION}
-                LARAVEL_VERSION: ${LARAVEL_VERSION}
-                ORCHID_VERSION: ${ORCHID_VERSION}
                 HOST_FILES_OWNER_UID: ${HOST_FILES_OWNER_UID}
                 HOST_FILES_OWNER_NAME: ${HOST_FILES_OWNER_NAME}
         image: ${COMPOSE_PROJECT_NAME}_app
@@ -26,7 +24,8 @@ services:
             - './src:/var/www/app'
             - './docker/php/php.ini:/usr/local/etc/php/php.ini'
         depends_on:
-            - 'database'
+            database:
+                condition: service_healthy
 
     database:
         image: mariadb:${MYSQL_VERSION}
@@ -40,3 +39,7 @@ services:
             - '${PROJECT_IP}:3306:3306'
         volumes:
             - './docker/database/dbdata:/var/lib/mysql'
+        healthcheck:
+            test: [ 'CMD', 'mysqladmin', '-u${DB_USERNAME}', '-p${DB_PASSWORD}' , 'ping', '-h', 'localhost' ]
+            timeout: 20s
+            retries: 10

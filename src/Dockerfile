@@ -4,8 +4,6 @@ FROM php:${PHP_VERSION}
 
 ARG NODE_VERSION
 ARG NVM_VERSION
-ARG LARAVEL_VERSION
-ARG ORCHID_VERSION
 ARG HOST_FILES_OWNER_UID
 ARG HOST_FILES_OWNER_NAME
 
@@ -27,7 +25,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
     && rm -f /tmp/composer-setup.*
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash \
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash \
     && . ~/.bashrc \
     && nvm install ${NODE_VERSION} \
     && nvm alias default ${NODE_VERSION} \
